@@ -1,0 +1,17 @@
+name: linux
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+        image: gitlab-registry.cern.ch/cms-cloud/cmssw-docker/cc7-cvmfs:latest 
+        options: --privileged --cap-add SYS_ADMIN --device /dev/fuse
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+         ls /cvmfs
+         ls /cvmfs/cms.cern.ch
